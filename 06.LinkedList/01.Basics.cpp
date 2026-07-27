@@ -189,10 +189,30 @@ int isSorted(Node *p)
     return 1;
 }
 
+void removeDuplicates(Node *p)
+{
+    Node *q = p->next;
+
+    while (q != NULL)
+    {
+        if (p->data != q->data)
+        {
+            p = q;
+            q = q->next;
+        }
+        else
+        {
+            p->next = q->next;
+            delete q;
+            q = p->next;
+        }
+    }
+}
+
 int main()
 {
-    int A[] = {2, 3, 5};
-    create(A, 3);
+    int A[] = {10, 20, 20, 20, 30, 40, 50};
+    create(A, 7);
     // Display(first);
     // cout << "Count: " << count(first) << endl;
     // cout << "Recursive Count: " << RCount(first) << endl;
@@ -205,7 +225,8 @@ int main()
 
     // SortedInsert(first, 6);
 
-    cout << (isSorted(first) ? "True" : "False") << endl;
+    // cout << (isSorted(first) ? "True" : "False") << endl;
+    removeDuplicates(first);
 
     Display(first);
 }
